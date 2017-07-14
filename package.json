@@ -1,0 +1,31 @@
+{
+  "name": "tempmon-v1",
+  "version": "0.1.0",
+  "description": "app express mongo ",
+  "main": "./bin/www.js",
+  "scripts": {
+    "start": "node ./bin/www.js",
+    "pretest": "jshint *",
+    "test": "export DEBUG=livro_nodejs:* && istanbul cover _mocha tests/unit/*",
+    "test-api": "export DEBUG=livro_nodejs:* && export NODE_ENV=test && istanbul _mocha tests/api/*",
+    "nodemon": "nodemon ./bin/www.js"
+  },
+  "author": "DP",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "chai": "^4.1.0",
+    "config": "^1.26.1",
+    "debug": "^2.6.8",
+    "express": "^4.15.3",
+    "method-override": "^2.3.9",
+    "mocha-mongoose": "^1.2.0",
+    "mongojs": "^2.4.0",
+    "mongoose": "^4.11.1",
+    "passport": "^0.3.2",
+    "passport-http": "^0.3.0"
+  },
+  "devDependencies": {
+    "supertest": "^3.0.0"
+  }
+}
