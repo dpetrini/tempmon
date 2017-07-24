@@ -5,19 +5,19 @@ var request = require('supertest'),
     mongo   = require('../../db/mongo');
 
 var insert = function(callback) {
-  var rex = { name : "CT-7567", nickname: "Rex" };
-  mongo.collection('stormtroopers').insert(rex, callback);
+  var dummy = { node_id : "500", time: 1520852011496 };
+  mongo.collection('device_config_alerts').insert(dummy, callback);
 };
-describe('Stormtroopers Endpoints', function () {
+describe('Device Config Alerts (tempmon) Endpoints', function () {
   before(function(done) {
-    //Needed for could db connection
+    //Needed for wait db connection
     this.timeout(10000);
-    var stormtroopers = [
-          { name : "CT-1010", nickname : "Fox" },
-          { nickname : "Hardcase" },
-          { name : "CT-2224", nickname : "Cody" }
+    var device_config_alerts = [
+          { node_id : "600", time : 2520852011496 },
+          { condition: "lt10" },
+          { node_id : "007", email: "d.penstor@gmail.com" }
         ];
-    mongo.collection('stormtroopers').insert(stormtroopers, function(err, data) {
+    mongo.collection('device_config_alerts').insert(device_config_alerts, function(err, data) {
         if (err) {
           throw err;
         }
@@ -27,39 +27,39 @@ describe('Stormtroopers Endpoints', function () {
   });
 
   afterEach(function(done) {
-    mongo.collection('stormtroopers').remove({}, done);
+    mongo.collection('device_config_alerts').remove({}, done);
   });
-  it('GET /stormtroopers | returns all clones', function(done) {
+  it('GET /device_config_alerts | returns all devices', function(done) {
        this.timeout(5000);
     request(app)
-      .get('/stormtroopers')
+      .get('/device_config_alerts')
       .end(function(err, response) {
         var body = response.body;
         assert.equal(body.length, 3);
-        assert.equal(body[0].name, 'CT-1010');
-        assert.equal(body[0].nickname, 'Fox');
+        assert.equal(body[0].node_id, '600');
+        assert.equal(body[2].email, "d.penstor@gmail.com");
         done();
       });
   });
-  it('GET /stormtroopers/:_id', function(done) {
+  it('GET /device_config_alerts/:_id', function(done) {
        this.timeout(5000);
     insert(function(err, result) {
       var _id = result._id;
       request(app)
-        .get('/stormtroopers/' + _id)
+        .get('/device_config_alerts/' + _id)
         .end(function(err, response) {
           var body = response.body;
           delete body._id;
-          assert.deepEqual(body, { name: 'CT-7567', nickname: 'Rex'/*, divisions: [] */});
+          assert.deepEqual(body, { node_id : "500", time: 1520852011496 });
           done();
         });
     });
   });
-  it('GET /stormtroopers/:_id not found', function(done) {
+  it('GET /device_config_alerts/:_id not found', function(done) {
        this.timeout(5000);
     var _id = '55555aaaaa55555aaaaa4444';
     request(app)
-      .get('/stormtroopers/' + _id)
+      .get('/device_config_alerts/' + _id)
       .set('Accept', 'application/json')
       .expect(200)
       .end(function(err, response) {
@@ -68,27 +68,45 @@ describe('Stormtroopers Endpoints', function () {
         done();
       });
   });
-  it('POST /stormtroopers', function(done) {
+  it('POST /device_config_alerts', function(done) {
        this.timeout(5000);
-    var fives = { name : "CT-27-5555", nickname : "Fives" };
+    var esp = { node_id : "800", time: 7720852011496 };;
     request(app)
-      .post('/stormtroopers')
-      .send(fives)
+      .post('/device_config_alerts')
+      .send(esp)
       .expect(201)
       .end(function(err, response) {
         var body = response.body;
-        assert.equal(body.nickname, 'Fives')
+        assert.equal(body.node_id, '800')
         assert.ok(body._id);
         done();
       });
   });
-  it('PUT /stormtroopers/:_id', function(done) {
+
+  // Email invalido
+  it('GET /device_config_alerts/sensor?... - invalid email', function(done) {
+    this.timeout(5000);
+    var esp = { node_id : "350", email: "rrr%gmail.com" };;
+    request(app)
+      .get('/device_config_alerts/sensor')
+      .send(esp)
+      .expect(403)
+      .end(function(err, response) {
+        console.log(err); //console.log(response);
+        var body = response.body;
+        assert.equal(body.err, "Forbidden")
+        done();
+      });
+  });
+
+
+  it('PUT /device_config_alerts/:_id', function(done) {
        this.timeout(5000);
     insert(function(err, result) {
       var _id = result._id;
       request(app)
-        .put('/stormtroopers/' + _id)
-        .send({ name: "CT-7567-77" })
+        .put('/device_config_alerts/' + _id)
+        .send({ node_id: "444" })
         .end(function(err, response) {
           var body = response.body;
           //Não podemos comparar o obj abaixo pois com acesso nuvem a resposta é diferente
@@ -100,12 +118,12 @@ describe('Stormtroopers Endpoints', function () {
         });
     });
   });
-  it('DELETE /stormtroopers/:_id', function(done) {
+  it('DELETE /device_config_alerts/:_id', function(done) {
        this.timeout(5000);
     insert(function(err, result) {
       var _id = result._id;
       request(app)
-        .delete('/stormtroopers/' + _id)
+        .delete('/device_config_alerts/' + _id)
         .end(function(err, response) {
           var body = response.body;
           //Não podemos comparar o obj abaixo pois com acesso nuvem a resposta é diferente

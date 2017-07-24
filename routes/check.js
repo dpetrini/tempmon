@@ -25,7 +25,7 @@ router.get('/status/complete', function(request, response, next) {
     ret.checks.push({
       "ok": !err,
       "name": "mongo",
-      "error": (err ? err.message : ''),
+      "error": (err ? err.message : 'No errors'),
       "details": {
         "url": config.get('mongo.server') + ':' + config.get('mongo.port')
       }
