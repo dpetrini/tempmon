@@ -1,6 +1,6 @@
 {
   "name": "tempmon",
-  "version": "0.1.0",
+  "version": "0.1.4",
   "private": true,
   "description": "app express mongo ",
   "main": "./bin/www.js",
@@ -11,7 +11,7 @@
   "scripts": {
     "start": "node ./bin/www.js",
     "pretest": "jshint *",
-    "test": "export DEBUG=tempmon:* && nyc mocha tests/unit/*",
+    "test": "export DEBUG=tempmon:* && nyc --reporter=html --reporter=text mocha tests/unit/*",
     "test-api": "export DEBUG=tempmon:* && export NODE_ENV=test && nyc --reporter=html --reporter=text mocha tests/api/*",
     "nodemon": "nodemon ./bin/www.js"
   },
