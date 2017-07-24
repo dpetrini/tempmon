@@ -6,11 +6,11 @@ router.get('/', function (request, response) {
   response.json({ 'name': 'Daniel Petrini', 'email': 'd.pensator@gmail.com' });
 });
 
-// stormtroopers
-//router.use('/stormtroopers', require('./stormtroopers'));
-
 // data_device_th
 router.use('/device_data_th', require('./device_data_th'));
+
+// device_config_alerts
+router.use('/device_config_alerts', require('./device_config_alerts'));
 
 //overall check
 router.use('/check', require('./check'));

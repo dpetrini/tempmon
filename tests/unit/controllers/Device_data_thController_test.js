@@ -10,7 +10,7 @@ request.params._id = '5569c7fe17fa3690d24de049';
 
 describe('Device_data_thController', function () {
   it('#create', function(done) {
-    request.body.name = 'Rex';
+    request.body.name = 'kkk';
     response.json = function(obj) {
       assert.deepEqual(obj, {_id: '5569c7fe17fa3690d24de049', node_id: '333'});
       done();

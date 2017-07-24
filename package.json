@@ -11,8 +11,10 @@
   "scripts": {
     "start": "node ./bin/www.js",
     "pretest": "jshint *",
-    "test": "export DEBUG=tempmon:* && nyc --reporter=html --reporter=text mocha tests/unit/*",
-    "test-api": "export DEBUG=tempmon:* && export NODE_ENV=test && nyc --reporter=html --reporter=text mocha tests/api/*",
+    "test2": "export DEBUG=tempmon:* && mocha tests/unit/*",
+    "test-api": "export DEBUG=tempmon:* && export NODE_ENV=test && mocha tests/api/*",
+    "testhtml": "export DEBUG=tempmon:* && nyc --reporter=html --reporter=text mocha tests/unit/*",
+    "testhtml-api": "export DEBUG=tempmon:* && export NODE_ENV=test && nyc --reporter=html --reporter=text mocha tests/api/*",
     "nodemon": "nodemon ./bin/www.js"
   },
   "author": "DP",
