@@ -1,13 +1,18 @@
 {
-  "name": "tempmon-v1",
+  "name": "tempmon",
   "version": "0.1.0",
+  "private": true,
   "description": "app express mongo ",
   "main": "./bin/www.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/dpetrini/tempmon.git"
+  },
   "scripts": {
     "start": "node ./bin/www.js",
     "pretest": "jshint *",
-    "test": "export DEBUG=livro_nodejs:* && istanbul cover _mocha tests/unit/*",
-    "test-api": "export DEBUG=livro_nodejs:* && export NODE_ENV=test && istanbul _mocha tests/api/*",
+    "test": "export DEBUG=tempmon:* && istanbul cover _mocha tests/unit/*",
+    "test-api": "export DEBUG=tempmon:* && export NODE_ENV=test && istanbul _mocha tests/api/*",
     "nodemon": "nodemon ./bin/www.js"
   },
   "author": "DP",
@@ -19,9 +24,7 @@
     "debug": "^2.6.8",
     "express": "^4.15.3",
     "method-override": "^2.3.9",
-    "mocha-mongoose": "^1.2.0",
     "mongojs": "^2.4.0",
-    "mongoose": "^4.11.1",
     "passport": "^0.3.2",
     "passport-http": "^0.3.0"
   },
