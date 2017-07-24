@@ -1,7 +1,7 @@
 var fixtures          = require('../../fixtures'),
-    StormtrooperModel = require('../../../models/StormtrooperModel')(fixtures.mongoose),
+    StormtrooperModel = require('../../../models/StormtrooperModel')(fixtures.mongo),
     assert            = require('assert'),
-    debug             = require('debug')('livro_nodejs:test');
+    debug             = require('debug')('tempmon:test');
 
 describe('StormtrooperModel', function () {
   it('#insert', function(done) {

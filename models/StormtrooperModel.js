@@ -1,46 +1,35 @@
 /*
   Model
-  Access layer for Mongo DB - using Mongoose
+  Access layer for Mongo DB - using Mongojs
+  Not in use in this project - here only for reference
 
 */
 
-var debug   = require('debug')('livro_nodejs:Model');
+var debug   = require('debug')('tempmon:Model');
 
-'use strict';
-function StormtrooperDAO(model) {
-  this.model = model;
+function StormtrooperModel(mongo) {
+  this.mongo = mongo;
 }
-StormtrooperDAO.prototype.create = function(data, callback) {
-  var model = new this.model(data);
-    model.save(function(err, result) {
-    callback(err, result);
-  });
+StormtrooperModel.prototype.find = function(query, callback) {
+  this.mongo.collection('stormtroopers').find(query, callback);
 };
-StormtrooperDAO.prototype.find = function(query, callback) {
-  this.model.find(query).exec(callback);
+StormtrooperModel.prototype.findOne = function(_id, callback) {
+  var query = { _id: this.mongo.ObjectId(_id) };
+  this.mongo.collection('stormtroopers').findOne(query, callback);
 };
-StormtrooperDAO.prototype.findOne = function(_id, callback) {
-  var query = { _id : _id };
-  this.model.findOne(query).exec(callback);
+StormtrooperModel.prototype.create = function(data, callback) {
+  debug(" insert data:" + data)
+  this.mongo.collection('stormtroopers').insert(data, callback);
 };
-StormtrooperDAO.prototype.update = function(_id, data, callback) {
-  var query = { _id : _id };
-  this.model.update(query, data).exec(function(err, result) {
-    callback(err, result);
-  });
+StormtrooperModel.prototype.update = function(_id, data, callback) {
+  var query = { _id: this.mongo.ObjectId(_id) };
+  debug(" update:" + JSON.stringify(query));
+  this.mongo.collection('stormtroopers').update(query, data, callback);
 };
-StormtrooperDAO.prototype.remove = function(_id, callback) {
-  var query = { _id : _id };
-  this.model.remove(query).exec(function(err, result) {
-    callback(err, result);
-  });
+StormtrooperModel.prototype.remove = function(_id, callback) {
+  var query = { _id: this.mongo.ObjectId(_id) };
+  this.mongo.collection('stormtroopers').remove(query, callback);
 };
-module.exports = function(mongoose) {
-  var Stormtrooper = mongoose.model('Stormtrooper', {
-    name:       String,
-    nickname:   String,
-    divisions:  [String],
-    patent:     String
-  });
-  return new StormtrooperDAO(Stormtrooper);
-};
+module.exports = function(mongo) {
+  return new StormtrooperModel(mongo);
+}

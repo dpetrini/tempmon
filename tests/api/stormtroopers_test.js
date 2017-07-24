@@ -1,6 +1,6 @@
 var request = require('supertest'),
     assert  = require('assert'),
-    debug   = require('debug')('livro_nodejs:test'),
+    debug   = require('debug')('tempmon:test'),
     app     = require('../../app'),
     mongo   = require('../../db/mongo');
 
@@ -11,7 +11,7 @@ var insert = function(callback) {
 describe('Stormtroopers Endpoints', function () {
   before(function(done) {
     //Needed for could db connection
-    this.timeout(5000);
+    this.timeout(10000);
     var stormtroopers = [
           { name : "CT-1010", nickname : "Fox" },
           { nickname : "Hardcase" },
@@ -50,7 +50,7 @@ describe('Stormtroopers Endpoints', function () {
         .end(function(err, response) {
           var body = response.body;
           delete body._id;
-          assert.deepEqual(body, { name: 'CT-7567', nickname: 'Rex', divisions: [] });
+          assert.deepEqual(body, { name: 'CT-7567', nickname: 'Rex'/*, divisions: [] */});
           done();
         });
     });

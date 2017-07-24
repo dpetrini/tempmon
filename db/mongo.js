@@ -1,21 +1,30 @@
 var mongojs = require('mongojs'),
     config  = require('config'),
-    debug   = require('debug')('livro_nodejs:db');
+    debug   = require('debug')('tempmon:db');
 
 //"mongodb://Daniel:harmonia.900@cluster0-shard-00-00-muruw.mongodb.net:27017,cluster0-shard-00-01-muruw.mongodb.net:27017,cluster0-shard-00-02-muruw.mongodb.net:27017/MAIN?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin";
 
 'use strict';
 
+debug("NODE_ENV:" + process.env.NODE_ENV  );
+
 function _connection() {
+  let temp = '';
   var username  = config.get('mongo.username'),
     password    = config.get('mongo.password'),
     server      = config.get('mongo.server'),
     port        = config.get('mongo.port'),
     database    = config.get('mongo.database'),
+    ssl         = config.get('mongo.ssl')
     auth        = username ? username + ':' + password + '@' : '';
 
-    debug(database.substring(0,10));
-  return 'mongodb://' + auth + server + '' + port + '/' + database;
+    debug(`Database: ${database}`);
+    
+    temp = 'mongodb://' + auth + server + '' + port + '/' + database + ssl;
+
+    debug(`Connection: ${temp}`);
+
+  return temp;
 }
 var db = mongojs(_connection());
 db.on('error', function(err) {

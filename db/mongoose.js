@@ -1,6 +1,6 @@
 var mongoose = require('mongoose'),
     config  = require('config'),
-    debug   = require('debug')('livro_nodejs:db');
+    debug   = require('debug')('tempmon:db');
 
 //"mongodb://Daniel:harmonia.900@cluster0-shard-00-00-muruw.mongodb.net:27017,cluster0-shard-00-01-muruw.mongodb.net:27017,cluster0-shard-00-02-muruw.mongodb.net:27017/MAIN?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin";
 

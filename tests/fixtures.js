@@ -5,7 +5,7 @@
 */
 
 'use strict';
-var debug   = require('debug')('livro_nodejs:fixtures'),
+var debug   = require('debug')('tempmon:fixtures'),
     assert  = require('assert');
 
 function _model() {}
@@ -26,13 +26,13 @@ var fixtures = {
       return {};
     },
     find: function(query, callback) {
-      callback(null, [{"nickname": "Fives"}, {"nickname": "Fox"}]);
+      callback(null, [{ "node_id" : "600"}, {"node_id" : "200"} ]);
     },
     findOne: function(query, callback) {
-      callback(null, {"nickname": "Fives"});
+      callback(null, {"temperature": "55"});
     },
     insert: function(data, callback) {
-      callback(null, {"_id": "5569c7fe17fa3690d24de049", "nickname": "Rex"});
+      callback(null, {"_id": "5569c7fe17fa3690d24de049", "node_id": "333"});
     },
     update: function(query, data, callback) {
       callback(null, {"ok": 1, "nModified": 1, "n": 1 });

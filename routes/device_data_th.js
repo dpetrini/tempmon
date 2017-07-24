@@ -1,9 +1,10 @@
 var express = require('express'),
     router = express.Router();
 
-//var mongo = require('../db/mongo');
-var mongoose = require('../db/mongoose');
-var Device_data_thModel = require('../models/Device_data_thModel').mongooseModelNew(mongoose); //Objeto passado em this ai dentro..? (propria conexao do db)
+var mongo = require('../db/mongo');
+// var mongoose = require('../db/mongoose');
+//var Device_data_thModel = require('../models/Device_data_thModel').mongooseModelNew(mongoose); //Objeto passado em this ai dentro..? (propria conexao do db)
+var Device_data_thModel = require('../models/Device_data_thModel')(mongo); //Objeto passado em this ai dentro..? (propria conexao do db)
 var Device_data_thController = require('../controllers/Device_data_thController')(Device_data_thModel); //idem, e sim. Vide exports da origem.
 var passport = require('passport');
 

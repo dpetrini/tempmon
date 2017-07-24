@@ -1,8 +1,8 @@
 var fixtures                = require('../../fixtures'),
-    StormtrooperModel       = require('../../../models/StormtrooperModel')(fixtures.mongoose),
-    StormtrooperController  = new require('../../../controllers/StormtrooperController')(StormtrooperModel),
+    StormtrooperModel       = require('../../../models/StormtrooperModel')(fixtures.mongo),
+    StormtrooperController  = require('../../../controllers/StormtrooperController')(StormtrooperModel),
     assert                  = require('assert'),
-    debug                   = require('debug')('livro_nodejs:test');
+    debug                   = require('debug')('tempmon:test');
 
 var request = fixtures.request;
 var response = fixtures.response;

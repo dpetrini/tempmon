@@ -1,8 +1,19 @@
+/*
+  Test file for mongoose.
+   The DB must be tested separated from GET requests, as far as I can see.
+    this is because we can´t open same mongoose model in two files, the original
+    (in the express server) and here. Needs more research or chan ge the paradigm 
+    and test it separated (bd and connection-express)
+
+    ok - file not included
+
+*/
+
 //"mongodb://Daniel:harmonia.900@cluster0-shard-00-00-muruw.mongodb.net:27017,cluster0-shard-00-01-muruw.mongodb.net:27017,cluster0-shard-00-02-muruw.mongodb.net:27017/MAIN?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin";
 
 var request = require('supertest'),
     assert  = require('assert'),
-    debug   = require('debug')('livro_nodejs:test'),
+    debug   = require('debug')('tempmon:test'),
     app     = require('../../app');
 
 var dbURI    = "mongodb://Daniel:harmonia.900@cluster0-shard-00-00-muruw.mongodb.net:27017,cluster0-shard-00-01-muruw.mongodb.net:27017,cluster0-shard-00-02-muruw.mongodb.net:27017/TEST?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin";

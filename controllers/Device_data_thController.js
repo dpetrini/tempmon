@@ -1,4 +1,4 @@
-var debug = require('debug')('livro_nodejs:controller');
+var debug = require('debug')('tempmon:controller');
 
 
 //Objeto escopo desta funcao foi passado pelo router e eh atribuido em this abaixo

@@ -3,7 +3,7 @@ var express = require('express'),
 
 router.get('/', function (request, response) {
   response.status(201);
-  response.json({ 'name': 'William Bruno', 'email': 'wbrunom@gmail.com' });
+  response.json({ 'name': 'Daniel Petrini', 'email': 'd.pensator@gmail.com' });
 });
 
 // stormtroopers
