@@ -1,3 +1,5 @@
+/* Not in use  */
+
 var mongoose = require('mongoose'),
     config  = require('config'),
     debug   = require('debug')('tempmon:db');
@@ -36,6 +38,3 @@ db.once('open', function (callback) {
 });
 
 module.exports = mongoose
-
-//module.exports = {
-//    mongooseInstance: mongoose };

@@ -5,7 +5,7 @@
 
 */
 
-var debug   = require('debug')('TempMon:Model');
+var debug   = require('debug')('tempmon:Model');
 
 function Device_data_thModel(mongo) {
   this.mongo = mongo;
