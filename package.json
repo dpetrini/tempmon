@@ -11,8 +11,8 @@
   "scripts": {
     "start": "node ./bin/www.js",
     "pretest": "jshint *",
-    "test": "export DEBUG=tempmon:* && istanbul cover _mocha tests/unit/*",
-    "test-api": "export DEBUG=tempmon:* && export NODE_ENV=test && istanbul _mocha tests/api/*",
+    "test": "export DEBUG=tempmon:* && nyc mocha tests/unit/*",
+    "test-api": "export DEBUG=tempmon:* && export NODE_ENV=test && nyc --reporter=html --reporter=text mocha tests/api/*",
     "nodemon": "nodemon ./bin/www.js"
   },
   "author": "DP",

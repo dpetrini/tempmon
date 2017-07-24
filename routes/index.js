@@ -7,7 +7,7 @@ router.get('/', function (request, response) {
 });
 
 // stormtroopers
-router.use('/stormtroopers', require('./stormtroopers'));
+//router.use('/stormtroopers', require('./stormtroopers'));
 
 // data_device_th
 router.use('/device_data_th', require('./device_data_th'));
