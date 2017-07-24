@@ -1,3 +1,4 @@
+//Esse arquivo será removido
 /*
   Model
   Access layer for Mongo DB - using Mongojs

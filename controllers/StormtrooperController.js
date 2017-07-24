@@ -1,3 +1,4 @@
+//Esse arquivo será removido
 var debug = require('debug')('tempmon:controller');
 
 
