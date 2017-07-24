@@ -1,4 +1,4 @@
-//Esse arquivo será removido
+//Esse arquivo será removido no proximo commit - fica na maquina local para historico
 var debug = require('debug')('tempmon:controller');
 
 
