@@ -32,9 +32,13 @@ var fixtures = {
       callback(null, {"temperature": "55"});
     },
     insert: function(data, callback) {
-      callback(null, {"_id": "5569c7fe17fa3690d24de049", "node_id": "333"});
+      if (data.node_id == "999") {  //send email case
+        callback(null, { "node_id" : "999", time: 909000909090, log: "EmailSent" });
+      } else {
+        callback(null, {"_id": "5569c7fe17fa3690d24de049", "node_id": "333"});
+      }
     },
-    update: function(query, data, callback) {
+     update: function(query, data, callback) {
       callback(null, {"ok": 1, "nModified": 1, "n": 1 });
     },
     remove: function(query, callback) {

@@ -69,6 +69,17 @@ if (((req.query.temp > 100) || (req.query.temp <= -40)) ||
 
   debug(deviceData);
 
+  //check if some limit conditions met with this incoming sample
+  if (checkSensorConditions(req.query.node_id, req.query.temp, req.query.temp)) {
+    if (sendEmail()) {
+      console.log('An email was sent');
+    } else {
+      console.log('An email should be sent but wasn´t');
+    }
+  } else {
+    // Do nothing
+  }
+
   this.model.create(deviceData, function(err, data) {
     if(err) {
       return next(err);
@@ -97,6 +108,7 @@ Device_data_thController.prototype.remove = function(request, response, next) {
     response.json(data);
   });
 };
+
 module.exports = function(Device_data_thModel) {
   return new Device_data_thController(Device_data_thModel);
 };

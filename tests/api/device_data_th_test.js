@@ -70,14 +70,14 @@ describe('Device Data TH (tempmon) Endpoints', function () {
   });
   it('POST /device_data_th', function(done) {
        this.timeout(5000);
-    var esp = { node_id : "800", time: 7720852011496 };;
+    var esp = { node_id : "800", time: 7720852011496 };
     request(app)
       .post('/device_data_th')
       .send(esp)
       .expect(201)
       .end(function(err, response) {
         var body = response.body;
-        assert.equal(body.node_id, '800')
+        assert.equal(body.node_id, "800")
         assert.ok(body._id);
         done();
       });
@@ -116,4 +116,21 @@ describe('Device Data TH (tempmon) Endpoints', function () {
         });
     });
   });
+
+  it('GET /device_data_th (send condition met email)', function(done) {
+       this.timeout(5000);
+    var esp = { node_id : "999", temperature: "90" };
+    request(app)
+      .get('/device_data_th')
+      .send(esp)
+      .expect(201)
+      .end(function(err, response) {
+        var body = response.body;
+        //{ "node_id" : "999", time: 909000909090, log: "EmailSent" }
+        assert.equal(body.node_id, "999");
+        assert.equal(body.log, "EmailSent");
+        done();
+      });
+  });
+
 });//describe

@@ -58,15 +58,6 @@ if (!validateEmail(req.query.email)) {
       return next (err);  //Unprocessable Entity
 }  
 
-/*
-if (((req.query.temp > 100) || (req.query.temp <= -40)) ||
-    ((req.query.humd >= 100) || (req.query.humd < 0))) {
-      var err = new Error('Out of the limits Value');
-      err.status = 422;
-      return next (err);  //Unprocessable Entity
-}
-    */
-
   let deviceData = {
       "node_id":      req.query.node_id,
       "time":         time,
@@ -105,10 +96,28 @@ Device_config_alertsController.prototype.remove = function(request, response, ne
     response.json(data);
   });
 };
+
+Device_config_alertsController.prototype.sendTestEmail = function(request, response, next) {
+  var email = request.body.email;
+
+  sendEmail('test', request, function(err, data) {
+    if(err) {
+      return next(err);
+    }
+    response.json(data);
+  });
+
+};
+
 module.exports = function(Device_config_alertsModel) {
   return new Device_config_alertsController(Device_config_alertsModel);
 };
 
+function sendEmail (action, request, callback) {
+
+  //request.query.email
+    return callback (null, { node_id : request.body.node_id, result: 'OK' });
+}
 
 function validateEmail(email) {
     var re = /\S+@\S+\.\S+/;

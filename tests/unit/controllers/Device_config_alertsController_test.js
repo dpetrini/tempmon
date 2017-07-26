@@ -51,4 +51,14 @@ describe('Device_config_alertsController', function () {
     };
     Device_config_alertsController.remove(request, response, fixtures.next);
   });
+
+  it('#send test email', function(done) {
+    request.body.node_id = "600";
+    response.json = function (obj) {
+      assert.deepEqual(obj, { node_id : "600", result: "OK" });
+      done();
+    };
+    Device_config_alertsController.sendTestEmail(request, response, fixtures.next);
+  });
+
 });//describe

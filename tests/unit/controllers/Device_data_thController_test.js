@@ -46,4 +46,16 @@ describe('Device_data_thController', function () {
     };
     Device_data_thController.remove(request, response, fixtures.next);
   });
+
+
+  it('#send condition met email', function(done) {
+    request.body.temperature = "90"; 
+    request.body.node_id = "999";
+    response.json = function (obj) {
+      assert.deepEqual(obj, { "node_id" : "999", time: 909000909090, log: "EmailSent" });
+       done();
+    }
+    Device_data_thController.create(request, response, fixtures.next);
+  });
+
 });//describe

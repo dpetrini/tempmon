@@ -70,14 +70,14 @@ describe('Device Config Alerts (tempmon) Endpoints', function () {
   });
   it('POST /device_config_alerts', function(done) {
        this.timeout(5000);
-    var esp = { node_id : "800", time: 7720852011496 };;
+    var esp = { node_id : "800", time: 7720852011496 };
     request(app)
       .post('/device_config_alerts')
       .send(esp)
       .expect(201)
       .end(function(err, response) {
         var body = response.body;
-        assert.equal(body.node_id, '800')
+        assert.equal(body.node_id, '800');
         assert.ok(body._id);
         done();
       });
@@ -99,6 +99,22 @@ describe('Device Config Alerts (tempmon) Endpoints', function () {
       });
   });
 
+    // Email de teste
+  it('GET /device_config_alerts/emailtest ', function(done) {
+    this.timeout(5000);
+    var esp = { node_id : "350", email: "dpetrini2-compras@yahoo.com.br" };
+    request(app)
+      .get('/device_config_alerts/emailtest')
+      .send(esp)
+      //.expect(200)
+      .end(function(err, response) {
+        console.log(err); //console.log(response);
+        var body = response.body;
+        assert.equal(body.node_id, '350');
+        assert.equal(body.result, 'OK');
+        done();
+      });
+  });
 
   it('PUT /device_config_alerts/:_id', function(done) {
        this.timeout(5000);
