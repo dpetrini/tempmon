@@ -92,7 +92,7 @@ describe('Device Config Alerts (tempmon) Endpoints', function () {
       .send(esp)
       .expect(403)
       .end(function(err, response) {
-        console.log(err); //console.log(response);
+        if (err) console.log(err); //console.log(response);
         var body = response.body;
         assert.equal(body.err, "Forbidden")
         done();
@@ -100,15 +100,15 @@ describe('Device Config Alerts (tempmon) Endpoints', function () {
   });
 
     // Email de teste
-  it('GET /device_config_alerts/emailtest ', function(done) {
+  it('GET /device_config_alerts/test ', function(done) {
     this.timeout(5000);
     var esp = { node_id : "350", email: "dpetrini2-compras@yahoo.com.br" };
     request(app)
-      .get('/device_config_alerts/emailtest')
-      .send(esp)
-      //.expect(200)
+      .get('/device_config_alerts/test')
+      .query(esp)
+      .expect(200)
       .end(function(err, response) {
-        console.log(err); //console.log(response);
+        if (err) console.log(err); //console.log(JSON.stringify(response));
         var body = response.body;
         assert.equal(body.node_id, '350');
         assert.equal(body.result, 'OK');

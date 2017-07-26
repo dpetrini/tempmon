@@ -70,7 +70,7 @@ if (((req.query.temp > 100) || (req.query.temp <= -40)) ||
   debug(deviceData);
 
   //check if some limit conditions met with this incoming sample
-  if (checkSensorConditions(req.query.node_id, req.query.temp, req.query.temp)) {
+  if (checkSensorConditions(req)) {
     if (sendEmail()) {
       console.log('An email was sent');
     } else {
@@ -113,6 +113,20 @@ module.exports = function(Device_data_thModel) {
   return new Device_data_thController(Device_data_thModel);
 };
 
+/*
+ TODO
+ -Read alerts db searching for current node_id
+ -if finds, compare with current sample
+ -How to read other model's database inside this controller?
+
+*/
+function checkSensorConditions(request) {
+  return false;
+}
+
+function sendEmail (/*action, request, callback*/) {
+  return true;
+}
 
 /*
 function StormtrooperController() {}

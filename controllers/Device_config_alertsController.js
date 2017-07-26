@@ -1,4 +1,5 @@
 var debug = require('debug')('tempmon:configAlertsController');
+var transporter = require('../lib/sendmail');
 
 
 //Objeto escopo desta funcao foi passado pelo router e eh atribuido em this abaixo
@@ -21,7 +22,7 @@ Device_config_alertsController.prototype.getById = function(request, response, n
       return next(err);
     }
     if(!data){
-    	var err = new Error('Not Found');
+    	let err = new Error('Not Found');
     	err.status = 404;
     	return next (err);
     }
@@ -51,7 +52,6 @@ let time = timeNow.getTime();
 //console.log(`${req.query.node_id} | ${req.query.field} | ${req.query.condition} | ${req.query.email}`);
 
 //Basic consistence
-
 if (!validateEmail(req.query.email)) {
       var err = new Error('Forbidden');
       err.status = 403;
@@ -98,30 +98,56 @@ Device_config_alertsController.prototype.remove = function(request, response, ne
 };
 
 Device_config_alertsController.prototype.sendTestEmail = function(request, response, next) {
-  var email = request.body.email;
-
-  sendEmail('test', request, function(err, data) {
+  debug(`Send Email: ${request.query.node_id} | ${request.query.email}`);
+  sendEmail('Teste', request, function(err, data) {
     if(err) {
       return next(err);
     }
     response.json(data);
   });
-
 };
 
 module.exports = function(Device_config_alertsModel) {
   return new Device_config_alertsController(Device_config_alertsModel);
 };
 
+/*
+  Envia email de acordo com endereco em response & action
+*/
 function sendEmail (action, request, callback) {
 
-  //request.query.email
-    return callback (null, { node_id : request.body.node_id, result: 'OK' });
-}
+  if (!validateEmail(request.query.email)) {
+        var err = new Error('Forbidden');
+        err.status = 403;
+        callback(error);  //Unprocessable Entity
+  } 
 
+  // setup email data with unicode symbols
+  let mailOptions = {
+      from: '"TempMon server 👻" <dp.domotica@gmail.com>', // sender address
+      to: request.query.email, // list of receivers
+      subject: action + ' email from tempmon server, node: ' + request.query.node_id, // Subject line
+      text: 'Please confirm to tempmon administrator the reception of this message' // plain text body
+      //html: '<b>Hello world ?</b>' // html body
+  };
+
+  // send mail with defined transport object
+  transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+          console.log(error);
+          callback(error);
+      }
+      debug('Message %s sent: %s', info.messageId, info.response);
+      callback (null, { node_id : request.query.node_id, result: 'OK' });
+  });
+
+}
+/*
+  Email address consistense
+*/
 function validateEmail(email) {
     var re = /\S+@\S+\.\S+/;
     return re.test(email);
 }
 //More complete:
-//var EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;  
+//var EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;

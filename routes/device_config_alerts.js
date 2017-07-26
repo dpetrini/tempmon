@@ -18,9 +18,11 @@ var passport = require('passport');
 //router.get('/:_id', passport.authenticate('basic', { session: false }), StormtrooperController.getById.bind(StormtrooperController));
 router.get('/', Device_config_alertsController.getAll.bind(Device_config_alertsController));
 router.get('/sensor', Device_config_alertsController.createNew.bind(Device_config_alertsController));
+router.get('/test', Device_config_alertsController.sendTestEmail.bind(Device_config_alertsController));
 router.get('/:_id', Device_config_alertsController.getById.bind(Device_config_alertsController));
 router.post('/', Device_config_alertsController.create.bind(Device_config_alertsController));
 router.put('/:_id', Device_config_alertsController.update.bind(Device_config_alertsController));
 router.delete('/:_id', Device_config_alertsController.remove.bind(Device_config_alertsController));
+
 
 module.exports = router;
