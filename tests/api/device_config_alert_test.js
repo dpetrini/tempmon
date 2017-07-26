@@ -63,7 +63,7 @@ describe('Device Config Alerts (tempmon) Endpoints', function () {
       .set('Accept', 'application/json')
       .expect(200)
       .end(function(err, response) {
-        var body = response.body
+        var body = response.body;
         assert.equal(response.statusCode, 404);
         done();
       });
@@ -86,7 +86,7 @@ describe('Device Config Alerts (tempmon) Endpoints', function () {
   // Email invalido
   it('GET /device_config_alerts/sensor?... - invalid email', function(done) {
     this.timeout(5000);
-    var esp = { node_id : "350", email: "rrr%gmail.com" };;
+    var esp = { node_id : "350", email: "rrr%gmail.com" };
     request(app)
       .get('/device_config_alerts/sensor')
       .send(esp)
@@ -94,7 +94,7 @@ describe('Device Config Alerts (tempmon) Endpoints', function () {
       .end(function(err, response) {
         if (err) console.log(err); //console.log(response);
         var body = response.body;
-        assert.equal(body.err, "Forbidden")
+        assert.equal(body.err, "Forbidden");
         done();
       });
   });

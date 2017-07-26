@@ -25,6 +25,7 @@
     "config": "^1.26.1",
     "debug": "^2.6.8",
     "express": "^4.15.3",
+    "grunt": "^1.0.1",
     "method-override": "^2.3.9",
     "mongojs": "^2.4.0",
     "nodemailer": "^4.0.1",
@@ -32,6 +33,12 @@
     "passport-http": "^0.3.0"
   },
   "devDependencies": {
+    "eslint": "^3.19.0",
+    "eslint-config-airbnb-base": "^11.3.1",
+    "eslint-config-recommended": "^1.5.0",
+    "eslint-plugin-import": "^2.7.0",
+    "grunt-jsdoc": "^2.1.0",
+    "jsdoc": "^3.5.3",
     "supertest": "^3.0.0"
   }
 }

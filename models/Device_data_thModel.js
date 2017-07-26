@@ -18,7 +18,7 @@ Device_data_thModel.prototype.findOne = function(_id, callback) {
   this.mongo.collection('device_data_th').findOne(query, callback);
 };
 Device_data_thModel.prototype.create = function(data, callback) {
-  debug(" insert data:" + data)
+  debug("Insert data:" + data);
   this.mongo.collection('device_data_th').insert(data, callback);
 };
 Device_data_thModel.prototype.update = function(_id, data,callback) {
@@ -32,4 +32,4 @@ Device_data_thModel.prototype.remove = function(_id, callback) {
 };
 module.exports = function(mongo) {
   return new Device_data_thModel(mongo);
-}
+};

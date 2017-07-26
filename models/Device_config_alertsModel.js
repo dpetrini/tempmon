@@ -18,7 +18,7 @@ Device_config_alertsModel.prototype.findOne = function(_id, callback) {
   this.mongo.collection('device_config_alerts').findOne(query, callback);
 };
 Device_config_alertsModel.prototype.create = function(data, callback) {
-  debug(" insert data:" + data)
+  debug("Insert data:" + data);
   this.mongo.collection('device_config_alerts').insert(data, callback);
 };
 Device_config_alertsModel.prototype.update = function(_id, data,callback) {
@@ -32,4 +32,4 @@ Device_config_alertsModel.prototype.remove = function(_id, callback) {
 };
 module.exports = function(mongo) {
   return new Device_config_alertsModel(mongo);
-}
+};

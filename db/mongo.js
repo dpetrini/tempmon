@@ -15,7 +15,7 @@ function _connection() {
     server      = config.get('mongo.server'),
     port        = config.get('mongo.port'),
     database    = config.get('mongo.database'),
-    ssl         = config.get('mongo.ssl')
+    ssl         = config.get('mongo.ssl'),
     auth        = username ? username + ':' + password + '@' : '';
 
     debug(`Database: ${database}`);
@@ -32,6 +32,6 @@ db.on('error', function(err) {
   console.log(err);
 });
 db.on('connect', function () {
- console.log('Mongo database connected')
+ console.log('Mongo database connected');
 });
 module.exports = db;

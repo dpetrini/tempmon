@@ -54,7 +54,7 @@ describe('Device_data_thController', function () {
     response.json = function (obj) {
       assert.deepEqual(obj, { "node_id" : "999", time: 909000909090, log: "EmailSent" });
        done();
-    }
+    };
     Device_data_thController.create(request, response, fixtures.next);
   });
 
